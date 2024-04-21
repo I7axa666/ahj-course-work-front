@@ -5,7 +5,7 @@ export default class Sender {
     // this.url = 'http://localhost:3000/';
     this.url = 'https://ahj-course-work-back.onrender.com/';
     // this.ws = new WebSocket('ws://localhost:3000/ws');
-    this.ws = new WebSocket('ws://ahj-course-work-back.onrender.com/ws');
+    this.ws = new WebSocket('wss://ahj-course-work-back.onrender.com/ws');
     this.msgListCreater = new MsgListCreater();
     this.webSocketInit();
   }
