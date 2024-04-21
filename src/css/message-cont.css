@@ -1,0 +1,75 @@
+.message-container {
+  width: 80%;
+  min-height: 20px;
+  border: 1px solid black;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: 10px;
+  margin-bottom: 10px;
+
+  display: flex;
+}
+
+.message {
+  width: 100%;
+  margin-left: 20px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.attach-container {
+  width: 100px;
+  height: 40px;
+  position: relative;
+
+  cursor: pointer;
+}
+
+.attach-input {
+  position: absolute;
+  top:0; left: 0; bottom: 0; right: 0; margin: 0;
+  opacity: 0.1;
+  width: 100%;
+
+}
+
+.attach-icon {
+  position: absolute;
+  top:0; left: 0; bottom: 0; right: 0; margin: 0;
+  width: 100%;
+  background-color: gray;
+  border-radius: 5px;
+  line-height: 40px;
+  text-align: center;
+}
+
+/* .upload-btn {
+  position: absolute;
+  left: 101px;
+  height: 100%;
+  margin-left: 3px;
+} */
+
+.message-img {
+  width: 50px;
+  height: 50px;
+}
+
+.preview {
+  width: 200px;
+  /* height: 100px; */
+  padding: 20px; 
+  display: block;
+  overflow: hidden;
+}
+
+img, video, audio {
+  width: 100%
+}
+
+video, audio {
+  width: 80%
+}

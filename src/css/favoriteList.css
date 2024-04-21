@@ -1,0 +1,19 @@
+.favorite-list {
+  width: 100%;
+  min-height: 400px;
+  position: absolute;
+  top: 0;
+  left:0;
+  border: 2px solid blue;
+
+  background-color: antiquewhite;
+}
+
+.close-btn {
+    width: 50px;
+    height: 20px;
+    position: absolute;
+    top: 0;
+    right: -80px;
+
+}
