@@ -2,8 +2,10 @@ import MsgListCreater from './createMsgList';
 
 export default class Sender {
   constructor() {
-    this.url = 'http://localhost:3000/';
-    this.ws = new WebSocket('ws://localhost:3000/ws');
+    // this.url = 'http://localhost:3000/';
+    this.url = 'https://ahj-course-work-back.onrender.com/';
+    // this.ws = new WebSocket('ws://localhost:3000/ws');
+    this.ws = new WebSocket('ws://ahj-course-work-back.onrender.com/ws');
     this.msgListCreater = new MsgListCreater();
     this.webSocketInit();
   }
@@ -56,7 +58,15 @@ export default class Sender {
     const body = JSON.stringify({
       id,
     });
-    fetch('http://localhost:3000/', {
+    // fetch('http://localhost:3000/', {
+    //   method: 'PATCH',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body,
+    // });
+
+    fetch('https://ahj-course-work-back.onrender.com/', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
