@@ -1,7 +1,6 @@
 import Sender from './utilits/sender';
 import fileToString from './utilits/fileToString';
 import PreviewAttach from './components/previewAttach';
-// import recVideo from "./utilits/recVideo";
 import blobToBase64 from './utilits/blobToBase64';
 import FavoriteWindow from './components/favoriteWindow';
 
@@ -18,6 +17,7 @@ export default class ChatWIndow {
     this.recVideo = this.recVideo.bind(this);
     this.recAudio = this.recAudio.bind(this);
     this.showFavorite = this.showFavorite.bind(this);
+    this.cancle = this.cancle.bind(this);
   }
 
   init() {
@@ -31,13 +31,13 @@ export default class ChatWIndow {
           <input name="attach" type="file" class="attach-input">
           <span class="attach-icon">+</span>
         </form>
-        <button type="submit" form="form-attach" class="upload-btn">Upload</button>
+        <button type="submit" form="form-attach" class="upload-btn hidden">Upload</button>
         <button class="video-btn">Rec Video</button>
-        <button class="stop-video">stop Video</button>
-        <button class="send-video">send Video</button>
+        <button class="stop-video hidden">stop Video</button>
+        <button class="send-video hidden">send Video</button>
         <button class="audio-btn">Rec Audio</button>
-        <button class="stop-audio">stop Audio</button>
-        <button class="send-audio">send Audio</button>
+        <button class="stop-audio hidden">stop Audio</button>
+        <button class="send-audio hidden">send Audio</button>
         <button class="favorite-btn">show Favorite</button>
         <button class="cancle-btn">Cancel</button>
       </div> 
@@ -52,6 +52,7 @@ export default class ChatWIndow {
     this.recVideo();
     this.recAudio();
     this.showFavorite();
+    this.cancle();
   }
 
   sendMessage() {
@@ -90,6 +91,9 @@ export default class ChatWIndow {
 
       PreviewAttach.create(this.parentElement, this.myFile);
 
+      const uploadBtn = document.querySelector('.upload-btn');
+      uploadBtn.classList.remove('hidden');
+
       attachForm.addEventListener('submit', (e) => {
         e.preventDefault();
         if (!this.myFile) {
@@ -105,6 +109,7 @@ export default class ChatWIndow {
           });
           document.querySelector('.preview').remove();
           this.myFile = null;
+          uploadBtn.classList.add('hidden');
         });
       });
     });
@@ -126,6 +131,7 @@ export default class ChatWIndow {
       if (!fileType) { fileType = 'other'; }
       PreviewAttach.create(this.parentElement, this.myFile);
       const uploadBtn = document.querySelector('.upload-btn');
+      uploadBtn.classList.remove('hidden');
 
       const sendDrudAttach = () => {
         fileToString(this.myFile, (fileData) => {
@@ -138,6 +144,7 @@ export default class ChatWIndow {
           this.myFile = null;
         });
         uploadBtn.removeEventListener('click', sendDrudAttach);
+        uploadBtn.classList.add('hidden');
       };
 
       uploadBtn.addEventListener('click', sendDrudAttach);
@@ -146,9 +153,12 @@ export default class ChatWIndow {
 
   recVideo() {
     const videoBtn = this.parentElement.querySelector('.video-btn');
+    const sendButton = document.querySelector('.send-video');
     videoBtn.addEventListener('click', async () => {
       // console.log('rec');
       const stopBtn = document.querySelector('.stop-video');
+      videoBtn.classList.add('hidden');
+      stopBtn.classList.remove('hidden');
       const parentElement = document.querySelector('.organizer');
       const videoPlayer = document.createElement('video');
 
@@ -202,12 +212,12 @@ export default class ChatWIndow {
         recorder.stop();
         stream.getTracks().forEach((track) => track.stop());
         videoPlayer.removeEventListener('canplay', play);
+        sendButton.classList.remove('hidden');
+        stopBtn.classList.add('hidden');
       });
 
       recorder.start();
     });
-
-    const sendButton = document.querySelector('.send-video');
 
     sendButton.addEventListener('click', () => {
       if (!this.blob) return;
@@ -220,6 +230,8 @@ export default class ChatWIndow {
           });
           const video = document.querySelector('.video-preview');
           video.remove();
+          sendButton.classList.add('hidden');
+          videoBtn.classList.remove('hidden');
         });
 
       this.blob = null;
@@ -227,9 +239,13 @@ export default class ChatWIndow {
   }
 
   recAudio() {
-    const videoBtn = this.parentElement.querySelector('.audio-btn');
-    videoBtn.addEventListener('click', async () => {
+    const audioBtn = this.parentElement.querySelector('.audio-btn');
+    const sendButton = document.querySelector('.send-audio');
+    audioBtn.addEventListener('click', async () => {
       const stopBtn = document.querySelector('.stop-audio');
+      audioBtn.classList.add('hidden');
+      stopBtn.classList.remove('hidden');
+
       const parentElement = document.querySelector('.organizer');
       const audioPlayer = document.createElement('audio');
 
@@ -282,12 +298,12 @@ export default class ChatWIndow {
         recorder.stop();
         stream.getTracks().forEach((track) => track.stop());
         audioPlayer.removeEventListener('canplay', play);
+        stopBtn.classList.add('hidden');
+        sendButton.classList.remove('hidden');
       });
 
       recorder.start();
     });
-
-    const sendButton = document.querySelector('.send-audio');
 
     sendButton.addEventListener('click', () => {
       if (!this.blob) return;
@@ -300,6 +316,8 @@ export default class ChatWIndow {
           });
           const audio = document.querySelector('.audio-preview');
           audio.remove();
+          sendButton.classList.add('hidden');
+          audioBtn.classList.remove('hidden');
         });
 
       this.blob = null;
@@ -310,6 +328,12 @@ export default class ChatWIndow {
     const favoriteBtn = document.querySelector('.favorite-btn');
     favoriteBtn.addEventListener('click', () => {
       FavoriteWindow.show(this.sender);
+    });
+  }
+
+  cancle() {
+    document.querySelector('.cancle-btn').addEventListener('click', () => {
+      window.location.reload();
     });
   }
 }

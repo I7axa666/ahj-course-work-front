@@ -23,36 +23,18 @@ export default class Sender {
   }
 
   sendAttach(attach) {
-    // console.log(attach)
-    // fetch(this.url + 'addfile/', {
-    //   method: 'POST',
-    //   body: body
-    // })
     const body = JSON.stringify(attach);
-    // console.log(body)
+
     this.ws.send(body);
   }
 
   sendTxt(text) {
-    // fetch(this.url + 'addtext/', {
-    //   method: 'POST',
-    //   body: body
-    // })
-
     const body = JSON.stringify({
       type: 'text',
       text,
     });
     this.ws.send(body);
   }
-
-  // static showFavorite() {
-  //   // console.log(attach)
-  //   fetch(`${this.url}addfile/`, {
-  //     method: 'POST',
-  //     body,
-  //   });
-  // }
 
   static sendFavorite(id) {
     const body = JSON.stringify({
@@ -79,6 +61,28 @@ export default class Sender {
   getFavorite() {
     return fetch(this.url, {
       method: 'GET',
+    });
+  }
+
+  static pinMessage(id) {
+    const body = JSON.stringify({
+      id,
+    });
+
+    // fetch('http://localhost:3000/', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body,
+    // });
+
+    fetch('https://ahj-course-work-back.onrender.com/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body,
     });
   }
 }

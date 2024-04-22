@@ -8,6 +8,7 @@
   margin-bottom: 10px;
 
   display: flex;
+  margin-left: auto;
 }
 
 .message {
@@ -72,4 +73,20 @@ img, video, audio {
 
 video, audio {
   width: 80%
+}
+
+.pin-btn {
+  max-height: 40px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: auto;
+  margin-left: 10px;
+}
+
+.pinned {
+  position: absolute;
+  top: -100px;
+  right: 0;
+  max-height: 100px;
+  overflow: hidden;
 }
