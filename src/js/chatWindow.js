@@ -149,7 +149,7 @@ export default class ChatWIndow {
     videoBtn.addEventListener('click', async () => {
       // console.log('rec');
       const stopBtn = document.querySelector('.stop-video');
-      const parentElement = document.querySelector('.organaizer');
+      const parentElement = document.querySelector('.organazer');
       const videoPlayer = document.createElement('video');
 
       videoPlayer.classList.add('video-stream');
@@ -230,7 +230,7 @@ export default class ChatWIndow {
     const videoBtn = this.parentElement.querySelector('.audio-btn');
     videoBtn.addEventListener('click', async () => {
       const stopBtn = document.querySelector('.stop-audio');
-      const parentElement = document.querySelector('.organaizer');
+      const parentElement = document.querySelector('.organazer');
       const audioPlayer = document.createElement('audio');
 
       audioPlayer.classList.add('audio-stream');
